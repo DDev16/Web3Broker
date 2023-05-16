@@ -6,8 +6,7 @@ const HeroFilter = () => {
             <div className="home-text text-center">
                 <h2 className="fz55">Find Your Dream Home</h2>
                 <p className="fz18 color-white">
-                    From as low as $10 per day with limited time offer
-                    discounts.
+                   Experience the power of Web3 and Real Estate.
                 </p>
             </div>
             {/* End .home-text */}

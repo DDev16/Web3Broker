@@ -1,6 +1,49 @@
 import Link from "next/link";
+import React, { useState } from 'react';
+import Web3 from "web3";
+import contractABI from "../common/user-credentials/registration.json"
+import { useRouter } from 'next/router';
+
+    
 
 const Form = () => {
+
+  const [log, setLog] = useState("");
+  const router = useRouter();
+
+   
+    
+    
+
+  const handleRegisterWithMetamask = async () => {
+    setLog("Attempting to connect with MetaMask...");
+    if (typeof window.ethereum !== 'undefined') {
+        setLog("MetaMask is installed!");
+        const web3 = new Web3(window.ethereum);
+        try {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            setLog(`Connected with the account ${accounts[0]}`);
+
+            const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+            await contract.methods.register().send({ from: accounts[0] });
+
+            setLog('User registered successfully');
+
+            // Redirect to my-dashboard
+            router.push('/my-dashboard');
+
+        } catch (error) {
+            setLog("User account already registered");
+        }
+    } else {
+        setLog('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+}
+
+  
   return (
     <form action="#">
       <div className="heading text-center">
@@ -120,6 +163,17 @@ const Form = () => {
         </div>
         {/* End .col */}
       </div>
+      {/* <div className="col-lg-6"> */}
+      <button
+    type="button"
+    className="btn btn-log w-100 btn-thm"
+    onClick={handleRegisterWithMetamask}
+>
+    Register with MetaMask
+</button>
+<pre>{log}</pre>
+{/* </div> */}
+
       {/* more signin options */}
     </form>
   );

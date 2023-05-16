@@ -1,6 +1,87 @@
-import Link from "next/link";
+import React, { useState } from 'react';
+import Web3 from "web3";
+import contractABI from "../user-credentials/registration.json"
+
 
 const LoginSignup = () => {
+    const [log, setLog] = useState("");
+
+    const handleLoginWithMetamask = async () => {
+        setLog("Attempting to login with MetaMask...");
+        console.log("Attempting to login with MetaMask...");
+        if (typeof window.ethereum !== 'undefined') {
+            setLog("MetaMask is installed!");
+            console.log("MetaMask is installed!");
+            const web3 = new Web3(window.ethereum);
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                setLog(`Logged in with the account ${account}`);
+                console.log(`Logged in with the account ${account}`);
+    
+                const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+                const contract = new web3.eth.Contract(contractABI, contractAddress);
+    
+                const isRegistered = await contract.methods.isRegistered(account).call();
+                if (!isRegistered) {
+                    setLog('This account is not registered');
+                    console.log('This account is not registered');
+                    return;
+                }
+    
+                const message = `Sign this message to confirm you own the account ${account}`;
+                const signature = await web3.eth.personal.sign(message, account);
+                const recoveredAccount = await web3.eth.personal.ecRecover(message, signature);
+    
+                setLog(`Recovered account: ${recoveredAccount}`);
+                console.log(`Recovered account: ${recoveredAccount}`);
+                setLog(`Original account: ${account}`);
+                console.log(`Original account: ${account}`);
+                
+                if (recoveredAccount.toLowerCase() === account.toLowerCase()) {
+                    setLog('Login successful');
+                    console.log('Login successful');
+                } else {
+                    setLog('Login failed');
+                    console.log('Login failed');
+                }
+            } catch (error) {
+                console.error(error);
+                setLog("Error during login: " + error.message);
+            }
+        } else {
+            setLog('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+    }
+    
+    
+
+    const handleRegisterWithMetamask = async () => {
+        setLog("Attempting to connect with MetaMask...");
+        if (typeof window.ethereum !== 'undefined') {
+            setLog("MetaMask is installed!");
+            const web3 = new Web3(window.ethereum);
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                setLog(`Connected with the account ${accounts[0]}`);
+
+                const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+
+                const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+                await contract.methods.register().send({ from: accounts[0] });
+
+                setLog('User registered successfully');
+            } catch (error) {
+                setLog("User account already registered");
+            }
+        } else {
+            setLog('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+    }
+  
+
     return (
         <div className="modal-content">
             <div className="modal-header">
@@ -102,6 +183,15 @@ const LoginSignup = () => {
                                             </button>
                                         </div>
                                     </div>
+                                    <button
+        type="button"
+        className="btn btn-log w-100 btn-thm"
+        onClick={handleLoginWithMetamask}
+    >
+        Log In with MetaMask
+    </button>
+    <pre>{log}</pre>
+
                                     {/* End .row */}
 
                                     <hr />
@@ -225,6 +315,16 @@ const LoginSignup = () => {
                                             </button>
                                         </div>
                                     </div>
+                                    <button
+    type="button"
+    className="btn btn-log w-100 btn-thm"
+    onClick={handleRegisterWithMetamask}
+>
+    Register with MetaMask
+</button>
+<pre>{log}</pre>
+
+
                                     {/* End .row */}
 
                                     <hr />
