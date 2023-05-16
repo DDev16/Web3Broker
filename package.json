@@ -1,5 +1,6 @@
 {
   "name": "findhouse",
+  "description": "This is a Next.js project",
   "version": "1.6.0",
   "private": true,
   "scripts": {
