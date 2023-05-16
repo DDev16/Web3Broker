@@ -1,6 +1,6 @@
 {
-  "name": "web3realty",
-  "description": "This is a react nextjs template",
+  "name": "findhouse",
+  "description": "This is a Nextjs project",
   "version": "1.6.0",
   "private": true,
   "scripts": {
