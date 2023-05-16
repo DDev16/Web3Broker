@@ -9,8 +9,7 @@ const Footer = () => {
         <div className="footer_about_widget">
           <h4>About Site</h4>
           <p>
-            We’re reimagining how you buy, sell and rent. It’s now easier to get
-            into a place you love. So let’s do this, together.
+          We're revolutionizing the way you buy, sell, and rent properties by harnessing the power of blockchain technology. Through our innovative platform, it's now simpler and more secure than ever to find and acquire the perfect place for you. Let's embark on this transformative journey together, leveraging the potential of blockchain to reshape the real estate industry.
           </p>
         </div>
       </div>
@@ -55,7 +54,7 @@ const Footer = () => {
           <h4>Contact Us</h4>
           <ul className="list-unstyled">
             <li>
-              <a href="mailto:info@findhouse.com">info@findhouse.com</a>
+              <a href="mailto:info@findhouse.com">web3realtyagency@gmail.com</a>
             </li>
             <li>
               <a href="#">Collins Street West, Victoria</a>
@@ -67,7 +66,7 @@ const Footer = () => {
               <a href="tel:+4733378901">+1 246-345-0699</a>
             </li>
             <li>
-              <a href="tel:+4733378901">+1 246-345-0695</a>
+              <a href="tel:+4733378901">+1 387-657-6655</a>
             </li>
           </ul>
         </div>

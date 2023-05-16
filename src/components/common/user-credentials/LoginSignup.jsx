@@ -19,7 +19,7 @@ const LoginSignup = () => {
                 setLog(`Logged in with the account ${account}`);
                 console.log(`Logged in with the account ${account}`);
     
-                const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+                const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; 
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
     
                 const isRegistered = await contract.methods.isRegistered(account).call();
@@ -66,7 +66,7 @@ const LoginSignup = () => {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 setLog(`Connected with the account ${accounts[0]}`);
 
-                const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+                const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; 
 
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
 

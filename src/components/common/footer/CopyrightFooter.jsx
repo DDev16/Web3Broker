@@ -29,16 +29,8 @@ const CopyrightFooter = () => {
 
       <div className="col-lg-6 col-xl-6">
         <div className="copyright-widget text-end">
-          <p>
-            &copy; {new Date().getFullYear()} by{" "}
-            <a
-              href="https://themeforest.net/user/ib-themes"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ib-themes
-            </a>
-            . All rights reserved.
+        <p>
+            &copy; {new Date().getFullYear()} All rights reserved. Web3Realty 2023.
           </p>
         </div>
       </div>

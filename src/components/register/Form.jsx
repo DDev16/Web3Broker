@@ -24,7 +24,7 @@ const Form = () => {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             setLog(`Connected with the account ${accounts[0]}`);
 
-            const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+            const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; 
 
             const contract = new web3.eth.Contract(contractABI, contractAddress);
 
@@ -39,9 +39,9 @@ const Form = () => {
             setLog("User account already registered");
         }
     } else {
-        setLog('Non-Ethereum browser detected. You should consider trying MetaMask!');
-    }
-}
+      setLog('Non-Ethereum browser detected. You should consider trying <a href="https://metamask.io/download.html" target="_blank" rel="noopener noreferrer">MetaMask</a> !');
+  }
+  }  
 
   
   return (
